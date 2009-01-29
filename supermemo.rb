@@ -15,15 +15,21 @@ configure do
   end unless DB.table_exists?(:entries)
 end
 
+get '/d' do
+  env.inspect
+end
+
 get '/c.css' do
   content_type 'text/css'
   sass :c
 end
 
 get '/' do
-  haml :index
+  haml :index, :locals => { :entries => DB[:entries] }
 end
 
-post '/p.js' do
-  DB[:entries] << params.slice(:text)
+post '/p' do
+  p params.inspect
+  DB[:entries] << params.slice("text")
+  haml :p
 end

@@ -7,3 +7,10 @@
   %textarea{:name => 'content', :cols => 50, :rows => 10}
   %br/
   %input{:value => 'Submit', :type => :submit}
+
+%ul
+  - for entry in entries
+    %li= entry[:text]
+
+%p
+  %a{:href => erb(:bm)} Save
