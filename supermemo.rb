@@ -12,7 +12,7 @@ configure do
   DB = Sequel.connect(ENV["DATABASE_URI"] || "sqlite://dev.db")
   DB.create_table :entries do
     column :text, :string
-  end
+  end unless DB.table_exists?(:entries)
 end
 
 get '/c.css' do
