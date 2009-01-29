@@ -12,6 +12,7 @@ configure do
   DB = Sequel.connect(ENV["DATABASE_URI"] || "sqlite://dev.db")
   DB.create_table :entries do
     column :text, :string
+    column :referrer, :string
   end unless DB.table_exists?(:entries)
 end
 
@@ -30,6 +31,6 @@ end
 
 post '/p' do
   p params.inspect
-  DB[:entries] << params.slice("text")
+  DB[:entries] << x = params.slice("text", "referrer")
   haml :p
 end

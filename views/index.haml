@@ -10,7 +10,7 @@
 
 %ul
   - for entry in entries
-    %li= entry[:text]
+    %li== #{entry[:text]} -- #{entry[:referrer]}
 
 %p
   %a{:href => erb(:bm)} Save
